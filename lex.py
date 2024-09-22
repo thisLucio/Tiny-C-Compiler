@@ -1,14 +1,23 @@
 class Lexer:
     def __init__(self, source):
-        pass
+        self.source = source + '\n'
+        self.curChar = ''
+        self.curPos = -1
+        self.nextChar()
 
     #Process the next character.
     def nextChar(self):
-        pass
+        self.curPos += 1
+        if self.curPos >= len(self.source):
+            self.curChar = '\0' #EOP
+        else:
+            self.curChar = self.source[self.curPos]
 
     #Return the lookahead character
     def peek(self):
-        pass
+        if self.curPos + 1 >= len(self.source):
+            return '\0'
+        return self.source[self.curPos+1]
 
     #Invalid token found, then print error message and exit.
     def abot(self, message):
