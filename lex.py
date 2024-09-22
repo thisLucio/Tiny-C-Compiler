@@ -9,7 +9,7 @@ class Lexer:
     def nextChar(self):
         self.curPos += 1
         if self.curPos >= len(self.source):
-            self.curChar = '\0' #EOP
+            self.curChar = '\0' #EOF
         else:
             self.curChar = self.source[self.curPos]
 
