@@ -1,8 +1,7 @@
 import sys
-from email.parser import Parser
-
 from lex import *
 from parse import *
+from emit import *
 
 def main():
     print("Stely Compiler BETA RELEASE v0.0.1")
@@ -13,9 +12,11 @@ def main():
         source = inputFile.read()
 
         lexer = Lexer(source)
-        parser = Parser(lexer)
+        emitter = Emitter("out.c")
+        parser = Parser(lexer, emitter)
 
         parser.program()
+        emitter.writeFile()
         print("Parsing completed.")
 
 
