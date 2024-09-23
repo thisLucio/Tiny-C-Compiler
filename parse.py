@@ -55,7 +55,34 @@ class Parser:
                 self.expression()
         # "IF" comparison "THEN" {statement} "ENDIF"
         elif self.checkToken(TokenType.IF):
+                print("STATEMENT-IF")
+                self.nextToken()
+                self.comparison()
 
+                self.match(TokenType.THEN)
+                self.nl()
+
+                # Zero or more statements in the body.
+                while not self.checkToken(TokenType.ENDIF):
+                    self.statement()
+
+                self.match(TokenType.ENDIF)
+
+        # "WHILE" comparison "REPEAT" {statement} "ENDWHILE"
+        elif self.checkToken(TokenType.WHILE):
+            print("STATEMENT-WHILE")
+            self.nextToken()
+            self.comparison()
+
+
+            self.match(TokenType.REPEAT)
+            self.nl()
+
+            # Zero or more statements in the loop body.
+            while not self.checkToken(TokenType.ENDWHILE):
+                self.statement()
+
+            self.match(TokenType.ENDWHILE)
 
         # Newline.
         self.nl()
