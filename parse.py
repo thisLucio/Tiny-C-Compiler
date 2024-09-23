@@ -120,6 +120,22 @@ class Parser:
         # Newline.
         self.nl()
 
+    # comparison ::= expression (("==" | "!=" | ">" | ">=" | "<" | "<=") expression)+
+    def comparison(self):
+        print("COMPARISON")
+
+        self.expression()
+        if self.isComparisonOperator():
+            self.nextToken()
+            self.expression()
+        else:
+            self.abort("Expected comparison operator at: " + self.curToken.text)
+
+        # Can have 0 or more comparison operator and expressions.
+        while self.isComparisonOperator():
+            self.nextToken()
+            self.expression()
+
     # nl ::= '\n'+
     def nl(self):
          print("NEWLINE")
