@@ -1,23 +1,24 @@
-import sys
 from lex import *
-from parse import *
 from emit import *
+from parse import *
+import sys
 
 def main():
     print("Stely Compiler BETA RELEASE v0.0.1")
 
     if len(sys.argv) != 2:
-        sys.exit("Err> The Compiler needs source file as args")
+        sys.exit("Error: Compiler needs source file as argument.")
     with open(sys.argv[1], 'r') as inputFile:
         source = inputFile.read()
 
-        lexer = Lexer(source)
-        emitter = Emitter("out.c")
-        parser = Parser(lexer, emitter)
+    # Initialize the lexer, emitter, and parser.
+    lexer = Lexer(source)
+    emitter = Emitter("out.c")
+    parser = Parser(lexer, emitter)
 
-        parser.program()
-        emitter.writeFile()
-        print("Parsing completed.")
+    parser.program()  # Start the parser.
+    emitter.writeFile()  # Write the output to file.
+    print("Compiling completed.")
 
 
 main()

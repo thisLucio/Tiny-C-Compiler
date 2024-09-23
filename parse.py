@@ -138,7 +138,7 @@ class Parser:
         elif self.checkToken(TokenType.INPUT):
             print("STATEMENT-INPUT")
             self.nextToken()
-            self.nextToken()
+
 
             # If variable doesn't already exist, declare it.
             if self.curToken.text not in self.symbols:
