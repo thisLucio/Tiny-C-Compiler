@@ -30,7 +30,8 @@ class Lexer:
 
     # Skip whitespace except newlines, which we will use to indicate the end of stmt.
     def skipWhitespace(self):
-        pass
+        while self.curChar == ' ' or self.curChar == '\t' or self.curChar == '\r':
+            self.nextChar()
 
     # Skip comments in the code.
     def skipComent(self):
@@ -38,6 +39,8 @@ class Lexer:
 
     # Return the next token.
     def getToken(self):
+        self.skipWhitespace()
+
         token = None
 
         if self.curChar == '+':
