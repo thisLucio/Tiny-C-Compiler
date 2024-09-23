@@ -9,7 +9,7 @@ def main():
 
     if len(sys.argv) != 2:
         sys.exit("Err> The Compiler needs source file as args")
-    with open(sys.argv[1]. 'r') as inputFile:
+    with open(sys.argv[1], 'r') as inputFile:
         source = inputFile.read()
 
         lexer = Lexer(source)
