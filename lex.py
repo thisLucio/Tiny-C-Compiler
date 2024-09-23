@@ -1,4 +1,6 @@
 import enum
+import sys
+
 
 class Lexer:
     def __init__(self, source):
@@ -22,8 +24,9 @@ class Lexer:
         return self.source[self.curPos+1]
 
     #Invalid token found, then print error message and exit.
-    def abot(self, message):
-        pass
+    def abort(self, message):
+        sys.exit("Lexing error. " + message)
+
 
     # Skip whitespace except newlines, which we will use to indicate the end of stmt.
     def skipWhitespace(self):
@@ -48,9 +51,9 @@ class Lexer:
         elif self.curChar == '\n':
             token = Token(self.curChar, TokenType.NEWLINE)
         elif self.curChar == '\0':
-            token = Token(self.curChar, TokenType.EOF)
+            token = Token('', TokenType.EOF)
         else:
-            pass
+            self.abort("Unknown token: " + self.curChar)
 
         self.nextChar()
         return token
