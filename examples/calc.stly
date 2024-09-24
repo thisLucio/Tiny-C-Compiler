@@ -1,0 +1,66 @@
+# Calculadora Simples com Funções e Condicionais
+
+PRINT "Calculadora Simples"
+PRINT ""
+
+# Função para calcular o fatorial
+LABEL factorial
+INPUT n
+LET result = 1
+WHILE n > 1 REPEAT
+    LET result = result * n
+    LET n = n - 1
+ENDWHILE
+PRINT result
+
+# Loop principal
+WHILE 1 REPEAT
+    PRINT "Escolha uma operação:"
+    PRINT "1. Soma"
+    PRINT "2. Subtração"
+    PRINT "3. Multiplicação"
+    PRINT "4. Divisão"
+    PRINT "5. Fatorial"
+    PRINT  "6. Sair"
+
+    INPUT choice
+
+    IF choice = 6 THEN
+        PRINT "Saindo..."
+        BREAK
+    ENDIF
+
+    PRINT "Digite dois números:"
+    INPUT num1
+    INPUT num2
+
+    IF choice = 1 THEN
+        LET result = num1 + num2
+    ENDIF
+
+    IF choice = 2 THEN
+        LET result = num1 - num2
+    ENDIF
+
+    IF choice = 3 THEN
+        LET result = num1 * num2
+    ENDIF
+
+    IF choice = 4 THEN
+        IF num2 = 0 THEN
+            PRINT "Erro: Divisão por zero!"
+        ELSE
+            LET result = num1 / num2
+        ENDIF
+    ENDIF
+
+    IF choice = 5 THEN
+        GOSUB factorial
+    ENDIF
+
+    IF choice <> 5 THEN # Imprime o resultado apenas se não for fatorial
+        PRINT "Resultado: " + result
+    ENDIF
+
+    PRINT ""
+ENDWHILE

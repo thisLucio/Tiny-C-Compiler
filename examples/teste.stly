@@ -1,0 +1,33 @@
+# Calculadora de Fatorial com Validação de Entrada
+
+PRINT "Calculadora de Fatorial"
+PRINT ""
+
+LABEL calcularFatorial
+INPUT numero
+
+# Validação da entrada
+IF numero < 0 THEN
+    PRINT "Erro: O fatorial não está definido para números negativos."
+    GOTO calcularFatorial # Solicita um novo número
+ENDIF
+
+LET fatorial = 1
+LET contador = 1
+
+WHILE contador <= numero REPEAT
+    LET fatorial = fatorial * contador
+    LET contador = contador + 1
+ENDWHILE
+
+PRINT "O fatorial de " + numero + " é " + fatorial
+PRINT ""
+
+PRINT "Deseja calcular outro fatorial? (S/N)"
+INPUT resposta
+
+IF resposta == "S" THEN
+    GOTO calcularFatorial
+ENDIF
+
+PRINT "Fim do programa."

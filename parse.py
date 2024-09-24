@@ -79,20 +79,21 @@ class Parser:
         # "IF" comparison "THEN" {statement} "ENDIF"
         elif self.checkToken(TokenType.IF):
                # print("STATEMENT-IF")
-                self.nextToken()
-                self.emitter.emit("if(")
-                self.comparison()
+               self.nextToken()
+               self.emitter.emit("if(")
+               self.comparison()
 
-                self.match(TokenType.THEN)
-                self.nl()
-                self.emitter.emit("){")
 
-                # Zero or more statements in the body.
-                while not self.checkToken(TokenType.ENDIF):
-                    self.statement()
+               self.match(TokenType.THEN)
+               self.nl()
+               self.emitter.emitLine("){")
 
-                self.match(TokenType.ENDIF)
-                self.emitter.emitLine("}")
+               # Zero or more statements in the body.
+               while not self.checkToken(TokenType.ENDIF):
+                   self.statement()
+
+               self.match(TokenType.ENDIF)
+               self.emitter.emitLine("}")
 
         # "WHILE" comparison "REPEAT" {statement} "ENDWHILE"
         elif self.checkToken(TokenType.WHILE):
@@ -159,7 +160,7 @@ class Parser:
                 self.symbols.add(self.curToken.text)
                 self.emitter.headerLine("float " + self.curToken.text + ";")
 
-            self.emitter.emitLine("if() == scanf(\"%" + "f\", &" + self.curToken.text + ")) {")
+            self.emitter.emitLine("if(0 == scanf(\"%" + "f\", &" + self.curToken.text + ")) {")
             self.emitter.emitLine(self.curToken.text + " = 0;")
             self.emitter.emit("scanf(\"%")
             self.emitter.emitLine("*s\");")
