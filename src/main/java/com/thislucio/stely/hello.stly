@@ -1,0 +1,17 @@
+LET x = 5
+LET y = 10
+LET result = 0
+
+IF x < y THEN
+    PRINT "x is less than y"
+ENDIF
+
+WHILE x < y REPEAT
+    LET x = x + 1
+    LET result = result + x
+    PRINT result
+ENDWHILE
+
+LABEL end
+GOTO end
+PRINT "This will never print"
